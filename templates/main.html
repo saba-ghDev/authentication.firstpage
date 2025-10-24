@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flask Auth System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      text-align: center;
+      padding: 50px;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      display: inline-block;
+      min-width: 320px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 { color: #333; }
+    input {
+      padding: 8px;
+      margin: 8px;
+      width: 90%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+    .message { color: red; font-weight: bold; }
+    .form-container { display: none; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Authentication Demo</h2>
+
+    <div id="buttons">
+      <button onclick="showForm('login')">Login</button>
+      <button onclick="showForm('signup')">Sign Up</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="loginForm" class="form-container">
+      <h3>Login</h3>
+      <form method="POST" action="/login">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <!-- SIGNUP FORM -->
+    <div id="signupForm" class="form-container">
+      <h3>Sign Up</h3>
+      <form method="POST" action="/signup">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+
+    {% if message %}
+      <p class="message">{{ message }}</p>
+    {% endif %}
+
+    {% if page == 'welcome' %}
+      <h2>Welcome, {{ username }} 🎉</h2>
+    {% endif %}
+  </div>
+
+  <script>
+    function showForm(formType) {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('signupForm').style.display = 'none';
+      document.getElementById(formType + 'Form').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
